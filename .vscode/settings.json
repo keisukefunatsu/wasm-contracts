@@ -1,0 +1,8 @@
+{
+  "runTerminalCommand.commands": [
+    {
+      "command": "cargo +nightly test",
+      "auto": true
+    }
+  ]
+}
