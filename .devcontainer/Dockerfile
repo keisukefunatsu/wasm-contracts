@@ -4,6 +4,7 @@ FROM mcr.microsoft.com/devcontainers/rust:0-1-bullseye
 
 USER vscode
 
+RUN rustup toolchain install nightly
 RUN cargo install cargo-dylint dylint-link
 RUN cargo install cargo-contract
 

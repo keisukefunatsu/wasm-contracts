@@ -2,7 +2,6 @@
 
 #[ink::contract]
 mod flipper {
-
     /// Defines the storage of your contract.
     /// Add new fields to the below struct in order
     /// to add new static storage fields to your contract.
@@ -35,6 +34,15 @@ mod flipper {
             self.value = !self.value;
         }
 
+        pub fn random_flip(&mut self, num: i32) -> bool {
+            if num % 2 == 0 {
+                self.value = true;
+            } else {
+                self.value = false;
+            }
+
+            self.value
+        }
         /// Simply returns the current value of our `bool`.
         #[ink(message)]
         pub fn get(&self) -> bool {
@@ -64,6 +72,12 @@ mod flipper {
             assert_eq!(flipper.get(), false);
             flipper.flip();
             assert_eq!(flipper.get(), true);
+        }
+        #[ink::test]
+        fn random_works() {
+            let mut flipper = Flipper::new(false);
+            let num = 4;
+            assert_eq!(flipper.random_flip(num), true);
         }
     }
 }
