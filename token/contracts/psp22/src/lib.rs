@@ -2,10 +2,10 @@
 #![feature(min_specialization)]
 #![allow(clippy::let_unit_value)]
 
-pub use crate::psp22_example::selectors::*;
+pub use crate::psp22::selectors::*;
 
 #[openbrush::contract]
-mod psp22_example {
+mod psp22 {
     use ink::{
         codegen::{EmitEvent, Env},
         prelude::string::String,
@@ -29,7 +29,7 @@ mod psp22_example {
     pub type Result<T> = core::result::Result<T, PSP22Error>;
 
     /// Event type
-    pub type Event = <Psp22Example as ContractEventBase>::Type;
+    pub type Event = <Psp22 as ContractEventBase>::Type;
 
     pub(super) mod selectors {
         // Selectors for the methods of interest on PSP22.
@@ -46,7 +46,7 @@ mod psp22_example {
 
     #[ink(storage)]
     #[derive(Default, Storage)]
-    pub struct Psp22Example {
+    pub struct Psp22 {
         #[storage_field]
         psp22: psp22::Data,
         #[storage_field]
@@ -55,7 +55,7 @@ mod psp22_example {
         ownable: ownable::Data,
     }
 
-    impl Psp22Example {
+    impl Psp22 {
         #[ink(constructor)]
         pub fn new(name: String, symbol: String, decimals: u8, total_supply: Balance) -> Self {
             let mut instance = Self::default();
@@ -93,15 +93,15 @@ mod psp22_example {
     }
 
     // We have to implement the "main trait" for our contract to have the PSP22 methods available.
-    impl psp22::PSP22 for Psp22Example {}
+    impl psp22::PSP22 for Psp22 {}
 
     // And `PSP22Metadata` to get metadata-related methods.
-    impl metadata::PSP22Metadata for Psp22Example {}
+    impl metadata::PSP22Metadata for Psp22 {}
 
     // And so on...
-    impl Ownable for Psp22Example {}
+    impl Ownable for Psp22 {}
 
-    impl mintable::PSP22Mintable for Psp22Example {
+    impl mintable::PSP22Mintable for Psp22 {
         #[ink(message)]
         #[modifiers(only_owner)]
         /// Mints the `amount` of underlying tokens to the recipient identified by the `account` address.
@@ -110,7 +110,7 @@ mod psp22_example {
         }
     }
 
-    impl burnable::PSP22Burnable for Psp22Example {
+    impl burnable::PSP22Burnable for Psp22 {
         #[ink(message)]
         #[modifiers(only_owner)]
         /// Burns the `amount` of underlying tokens from the balance of `account` recipient.
@@ -121,14 +121,14 @@ mod psp22_example {
 
     // Overwrite the `psp22::Internal` trait to emit the events as described in the PSP22 spec:
     // https://github.com/w3f/PSPs/blob/master/PSPs/psp-22.md#transfer
-    impl psp22::Internal for Psp22Example {
+    impl psp22::Internal for Psp22 {
         fn _emit_transfer_event(
             &self,
             _from: Option<AccountId>,
             _to: Option<AccountId>,
             _amount: Balance,
         ) {
-            Psp22Example::emit_event(
+            Psp22::emit_event(
                 self.env(),
                 Event::Transfer(Transfer {
                     from: _from,
@@ -139,7 +139,7 @@ mod psp22_example {
         }
 
         fn _emit_approval_event(&self, _owner: AccountId, _spender: AccountId, _amount: Balance) {
-            Psp22Example::emit_event(
+            Psp22::emit_event(
                 self.env(),
                 Event::Approval(Approval {
                     owner: _owner,

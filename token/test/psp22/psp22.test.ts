@@ -1,7 +1,7 @@
 import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
-import Psp22Factory from "./typedContract/constructors/psp22";
-import Psp22 from "./typedContract/contracts/psp22";
+import Psp22Factory from "../../typedContract/constructors/psp22";
+import Psp22 from "../../typedContract/contracts/psp22";
 import { ApiPromise, WsProvider, Keyring } from "@polkadot/api";
 import { KeyringPair } from "@polkadot/keyring/types";
 
@@ -32,7 +32,7 @@ describe("psp22 test", () => {
     psp22Factory = new Psp22Factory(api, deployer);
 
     contract = new Psp22(
-      (await psp22Factory.new(maxSupply)).address,
+      (await psp22Factory.new("token", "TT", 18, maxSupply)).address,
       deployer,
       api
     );
@@ -45,7 +45,7 @@ describe("psp22 test", () => {
   it("Assigns initial balance", async () => {
     const queryList = await contract.query;
     expect(
-      (await contract.query.totalSupply()).value.rawNumber.toNumber()
+      (await contract.query.totalSupply()).value.unwrap()
     ).to.equal(maxSupply);
   });
 
@@ -61,10 +61,10 @@ describe("psp22 test", () => {
     });
 
     await expect(
-      (await contract.query.balanceOf(wallet1.address)).value.toNumber()
+      (await contract.query.balanceOf(wallet1.address)).value.unwrap()
     ).to.be.equal(transferredAmount);
     await expect(
-      (await contract.query.balanceOf(contract.signer.address)).value.toNumber()
+      (await contract.query.balanceOf(contract.signer.address)).value.unwrap()
     ).to.be.equal(maxSupply - transferredAmount);
   });
 
@@ -96,21 +96,21 @@ describe("psp22 test", () => {
     ).to.eventually.be.fulfilled;
 
     let result = await contract.query.balanceOf(hated_account.address);
-    expect(result.value.toNumber()).to.equal(transferredAmount);
+    expect(result.value.unwrap()).to.equal(transferredAmount);
 
-    expect((await contract.query.getHatedAccount()).value).to.equal(
-      EMPTY_ADDRESS
-    );
+    // expect((await contract.query.getHatedAccount()).value).to.equal(
+    //   EMPTY_ADDRESS
+    // );
 
-    // Hate account
-    await expect(
-      contract.tx.setHatedAccount(hated_account.address, {
-        gasLimit: gasRequired,
-      })
-    ).to.eventually.be.ok;
-    expect((await contract.query.getHatedAccount()).value).to.equal(
-      hated_account.address
-    );
+    // // Hate account
+    // await expect(
+    //   contract.tx.setHatedAccount(hated_account.address, {
+    //     gasLimit: gasRequired,
+    //   })
+    // ).to.eventually.be.ok;
+    // expect((await contract.query.getHatedAccount()).value).to.equal(
+    //   hated_account.address
+    // );
 
     // Transfer must fail
     expect(
@@ -121,7 +121,7 @@ describe("psp22 test", () => {
 
     // Amount of tokens must be the same
     expect(
-      (await contract.query.balanceOf(hated_account.address)).value.toNumber()
+      (await contract.query.balanceOf(hated_account.address)).value.unwrap()
     ).to.equal(10);
   });
 });

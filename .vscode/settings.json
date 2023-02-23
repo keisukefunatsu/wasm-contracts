@@ -1,6 +1,10 @@
 {
   "runTerminalCommand.commands": [
     {
+      "command": "yarn test",
+      "auto": true
+    },
+    {
       "command": "cargo +nightly test -- --nocapture",
       "auto": true
     },

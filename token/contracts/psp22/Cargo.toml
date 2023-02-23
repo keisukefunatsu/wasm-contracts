@@ -7,7 +7,6 @@ edition = "2021"
 [dependencies]
 ink = { git = "https://github.com/paritytech/ink", rev = "4655a8b4413cb50cbc38d1b7c173ad426ab06cde", default-features = false }
 
-
 scale = { package = "parity-scale-codec", version = "3", default-features = false, features = [
     "derive",
 ] }
@@ -21,6 +20,8 @@ openbrush = { git = "https://github.com/727-Ventures/openbrush-contracts", tag =
     "ownable",
 ] }
 
+[net]
+git-fetch-with-cli = true
 [lib]
 name = "psp22"
 path = "src/lib.rs"
