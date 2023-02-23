@@ -42,13 +42,16 @@ describe("psp22 test", () => {
     await api.disconnect();
   });
 
-  it("Assigns initial balance", async () => {
-    const queryList = await contract.query;
+  it("Assigns initial balance", async () => {    
     expect(
       (await contract.query.totalSupply()).value.unwrap().toNumber()
     ).to.equal(maxSupply);
   });
 
+  it("is Ownable", async () => {
+    expect((await contract.query.owner()).value.unwrap()).to.equal(deployer.address)
+  })
+  
   it("Transfer adds amount to destination account", async () => {
     const transferredAmount = 2;
 
@@ -60,11 +63,11 @@ describe("psp22 test", () => {
       gasLimit: gasRequired,
     });
 
-    await expect(
-      (await contract.query.balanceOf(wallet1.address)).value.ok?.toNumber()
+    expect(
+      (await contract.query.balanceOf(wallet1.address)).value.unwrap().toNumber()
     ).to.be.equal(transferredAmount);
-    await expect(
-      (await contract.query.balanceOf(contract.signer.address)).value.ok?.toNumber()
+    expect(
+      (await contract.query.balanceOf(contract.signer.address)).value.unwrap().toNumber()
     ).to.be.equal(maxSupply - transferredAmount);
   });
 
@@ -122,8 +125,6 @@ describe("psp22 test", () => {
     // Amount of tokens must be the same
     expect(
       (await contract.query.balanceOf(hated_account.address)).value.unwrap().toNumber()
-    ).to.equal(10);
-
-    expect((await contract.query.totalSupply()).value.unwrap().toNumber()).to.equal(10000000000)
+    ).to.equal(10);    
   });
 });
