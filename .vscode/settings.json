@@ -15,6 +15,5 @@
   ],
   "rust-analyzer.linkedProjects": [
     "./token/contracts/psp22/Cargo.toml"
-    // "./sss/contracts/psp22/Cargo.toml"
   ],
 }

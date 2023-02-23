@@ -123,5 +123,7 @@ describe("psp22 test", () => {
     expect(
       (await contract.query.balanceOf(hated_account.address)).value.unwrap().toNumber()
     ).to.equal(10);
+
+    expect((await contract.query.totalSupply()).value.unwrap().toNumber()).to.equal(10000000000)
   });
 });
