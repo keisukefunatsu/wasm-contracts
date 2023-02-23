@@ -49,6 +49,8 @@ mod psp22 {
     pub struct Psp22 {
         #[storage_field]
         psp22: psp22::Data,
+        // fields for hater logic
+        hated_account: AccountId,
         #[storage_field]
         metadata: metadata::Data,
         #[storage_field]
@@ -84,6 +86,16 @@ mod psp22 {
             instance._init_with_owner(Self::env().caller());
 
             instance
+        }
+
+        #[ink(message)]
+        pub fn set_hated_account(&mut self, hated: AccountId) {
+            self.hated_account = hated;
+        }
+
+        #[ink(message)]
+        pub fn get_hated_account(&self) -> AccountId {
+            self.hated_account.clone()
         }
 
         // Emit event abstraction. Otherwise ink! deserializes events incorrectly when there are events from more than one contract.

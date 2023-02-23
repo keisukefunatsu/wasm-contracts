@@ -20,8 +20,6 @@ openbrush = { git = "https://github.com/727-Ventures/openbrush-contracts", tag =
     "ownable",
 ] }
 
-[net]
-git-fetch-with-cli = true
 [lib]
 name = "psp22"
 path = "src/lib.rs"

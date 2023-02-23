@@ -82,46 +82,46 @@ describe("psp22 test", () => {
     ).to.eventually.be.rejected;
   });
 
-  // it("Can not transfer to hated account", async () => {
-  //   const hated_account = wallet2;
-  //   const transferredAmount = 10;
-  //   const { gasRequired } = await contract
-  //     .withSigner(deployer)
-  //     .query.transfer(wallet1.address, transferredAmount, []);
-  //   // Check that we can transfer money while account is not hated
-  //   await expect(
-  //     contract.tx.transfer(hated_account.address, 10, [], {
-  //       gasLimit: gasRequired,
-  //     })
-  //   ).to.eventually.be.fulfilled;
+  it("Can not transfer to hated account", async () => {
+    const hated_account = wallet2;
+    const transferredAmount = 10;
+    const { gasRequired } = await contract
+      .withSigner(deployer)
+      .query.transfer(wallet1.address, transferredAmount, []);
+    // Check that we can transfer money while account is not hated
+    await expect(
+      contract.tx.transfer(hated_account.address, 10, [], {
+        gasLimit: gasRequired,
+      })
+    ).to.eventually.be.fulfilled;
 
-  //   let result = await contract.query.balanceOf(hated_account.address);
-  //   expect(result.value.unwrap()).to.equal(transferredAmount);
+    let result = await contract.query.balanceOf(hated_account.address);
+    expect(result.value.unwrap().toNumber()).to.equal(transferredAmount);
 
-  //   expect((await contract.query.getHatedAccount()).value).to.equal(
-  //     EMPTY_ADDRESS
-  //   );
+    expect((await contract.query.getHatedAccount()).value.unwrap()).to.equal(
+      EMPTY_ADDRESS
+    );
 
-  //   // Hate account
-  //   await expect(
-  //     contract.tx.setHatedAccount(hated_account.address, {
-  //       gasLimit: gasRequired,
-  //     })
-  //   ).to.eventually.be.ok;
-  //   expect((await contract.query.getHatedAccount()).value).to.equal(
-  //     hated_account.address
-  //   );
+    // Hate account
+    await expect(
+      contract.tx.setHatedAccount(hated_account.address, {
+        gasLimit: gasRequired,
+      })
+    ).to.eventually.be.ok;
+    expect((await contract.query.getHatedAccount()).value.unwrap()).to.equal(
+      hated_account.address
+    );
 
-  //   // Transfer must fail
-  //   expect(
-  //     contract.tx.transfer(hated_account.address, 10, [], {
-  //       gasLimit: gasRequired,
-  //     })
-  //   ).to.eventually.be.rejected;
+    // Transfer must fail
+    expect(
+      contract.tx.transfer(hated_account.address, 10, [], {
+        gasLimit: gasRequired,
+      })
+    ).to.eventually.be.rejected;
 
-  //   // Amount of tokens must be the same
-  //   expect(
-  //     (await contract.query.balanceOf(hated_account.address)).value.ok?.toNumber()
-  //   ).to.equal(10);
-  // });
+    // Amount of tokens must be the same
+    expect(
+      (await contract.query.balanceOf(hated_account.address)).value.unwrap().toNumber()
+    ).to.equal(10);
+  });
 });
