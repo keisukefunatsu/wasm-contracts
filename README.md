@@ -42,6 +42,14 @@ swanky contract compile psp22 -v
 npx typechain-polkadot --in artifacts/ --out ./typedContract
 ```
 
+ temp workaround
+
+```
+cp contracts/psp22/target/ink/psp22.json artifacts/psp22.json
+cp contracts/psp22/target/ink/psp22.wasm artifacts/psp22.wasm
+npx typechain-polkadot --in artifacts/ --out ./typedContract
+```
+
 - Start Swanky Local Node
 
 ```
