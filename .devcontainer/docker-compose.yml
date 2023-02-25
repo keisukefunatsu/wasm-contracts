@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  swanky:    
+    volumes:
+      - ../..:/workspaces:cached    
+    command: sleep infinity
+    build: 
+      context: .
+      dockerfile: Dockerfile    
