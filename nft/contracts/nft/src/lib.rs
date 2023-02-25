@@ -1,34 +1,36 @@
 #![cfg_attr(not(feature = "std"), no_std)]
-
-// pub use ink;
+#![feature(min_specialization)]
 
 #[openbrush::contract]
-mod nft {
-    use openbrush::{
-        contracts::psp34::{extensions, *},
-        modifiers,
-        traits::Storage,
-    };
+pub mod nft {
+
+    // imports from openbrush
+    use openbrush::contracts::psp34::*;
+    use openbrush::traits::Storage;
+
     #[ink(storage)]
     #[derive(Default, Storage)]
     pub struct Nft {
+        #[storage_field]
         psp34: psp34::Data,
-        metadata: extensions::metadata::Data,
     }
-    // We have to implement the "main trait" for our contract to have the PSP22 methods available.
-    impl psp34::PSP34 for Nft {}
+
+    // Section contains default implementation without any modifications
+    impl PSP34 for Nft {}
+
     impl Nft {
         #[ink(constructor)]
         pub fn new() -> Self {
-            let mut instance = Self::default();
-
-            instance
+            let mut _instance = Self::default();
+            _instance
         }
         #[ink(message)]
-        pub fn flip(&mut self) -> bool {
-            true
+        pub fn flip(&self) -> bool {
+            return true;
+        }
+        #[ink(message)]
+        pub fn flip2(&self) -> bool {
+            return true;
         }
     }
-
-    // impl metadata::PSP34Metadata for Nft {}
 }

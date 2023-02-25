@@ -1,7 +1,7 @@
 import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
-import Psp22Factory from "../../typedContract/constructors/psp22";
-import Psp22 from "../../typedContract/contracts/psp22";
+import Psp22Factory from "./typedContract/constructors/psp22";
+import Psp22 from "./typedContract/contracts/psp22";
 import { ApiPromise, WsProvider, Keyring } from "@polkadot/api";
 import { KeyringPair } from "@polkadot/keyring/types";
 

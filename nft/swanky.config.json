@@ -24,8 +24,8 @@
       "deployments": [],
       "language": "ink",
       "build": {
-        "timestamp": 1677330912387,
-        "artifactsPath": "/Users/keisukefunatsu/Projects/defi/wasm-contracts/nft/artifacts/nft/1677330912387"
+        "timestamp": 1677346072556,
+        "artifactsPath": "/Users/pyon/Projects/defi_projects/astar/wasm-work/nft/artifacts/nft/1677346072556"
       }
     }
   },

@@ -37,7 +37,7 @@ describe("nft test", () => {
     await api.disconnect();
   });
 
-  it("Assign initial balance", async () => {
-    expect(contract.query.flip()).to.equal(true)
+  it("Assign initial balance", async () => {    
+    expect((await contract.query.flip()).value.unwrap()).to.equal(true)
   })
 });

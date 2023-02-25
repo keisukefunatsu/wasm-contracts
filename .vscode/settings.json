@@ -17,4 +17,5 @@
     "./token/contracts/psp22/Cargo.toml",
     "./nft/contracts/nft/Cargo.toml"
   ],
+  "compile-hero.disable-compile-files-on-did-save-code": false,
 }

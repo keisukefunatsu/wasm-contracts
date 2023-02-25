@@ -1,12 +1,12 @@
 {
   "source": {
-    "hash": "0xe230a4c7380d816ef81f7cfa9cb4f72cd313869085610f948b5fd6f65b59998b",
+    "hash": "0x5f42fe11aa172d5c4df906bc375494be85e0a7bc9a283ffa677d501d5ce8486a",
     "language": "ink! 4.0.0-beta",
     "compiler": "rustc 1.69.0-nightly",
     "build_info": {
       "build_mode": "Debug",
-      "cargo_contract_version": "2.0.1",
-      "rust_toolchain": "nightly-aarch64-apple-darwin",
+      "cargo_contract_version": "2.0.0",
+      "rust_toolchain": "nightly-x86_64-apple-darwin",
       "wasm_opt_settings": {
         "keep_debug_symbols": false,
         "optimization_passes": "Z"
@@ -253,6 +253,48 @@
       {
         "args": [
           {
+            "label": "owner",
+            "type": {
+              "displayName": [
+                "psp22",
+                "psp22_external",
+                "AllowanceInput1"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "spender",
+            "type": {
+              "displayName": [
+                "psp22",
+                "psp22_external",
+                "AllowanceInput2"
+              ],
+              "type": 2
+            }
+          }
+        ],
+        "docs": [
+          " Returns the amount which `spender` is still allowed to withdraw from `owner`.",
+          "",
+          " Returns `0` if no allowance has been set `0`."
+        ],
+        "label": "PSP22::allowance",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 10
+        },
+        "selector": "0x4d47d921"
+      },
+      {
+        "args": [
+          {
             "label": "from",
             "type": {
               "displayName": [
@@ -326,7 +368,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 10
+          "type": 11
         },
         "selector": "0x54b3c76e"
       },
@@ -374,7 +416,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 10
+          "type": 11
         },
         "selector": "0x96d6b57a"
       },
@@ -425,102 +467,9 @@
             "ink",
             "MessageResult"
           ],
-          "type": 10
+          "type": 11
         },
         "selector": "0xb20f1bbd"
-      },
-      {
-        "args": [
-          {
-            "label": "spender",
-            "type": {
-              "displayName": [
-                "psp22",
-                "psp22_external",
-                "DecreaseAllowanceInput1"
-              ],
-              "type": 2
-            }
-          },
-          {
-            "label": "delta_value",
-            "type": {
-              "displayName": [
-                "psp22",
-                "psp22_external",
-                "DecreaseAllowanceInput2"
-              ],
-              "type": 0
-            }
-          }
-        ],
-        "docs": [
-          " Atomically decreases the allowance granted to `spender` by the caller.",
-          "",
-          " An `Approval` event is emitted.",
-          "",
-          " # Errors",
-          "",
-          " Returns `InsufficientAllowance` error if there are not enough tokens allowed",
-          " by owner for `spender`.",
-          "",
-          " Returns `ZeroSenderAddress` error if sender's address is zero.",
-          "",
-          " Returns `ZeroRecipientAddress` error if recipient's address is zero."
-        ],
-        "label": "PSP22::decrease_allowance",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 10
-        },
-        "selector": "0xfecb57d5"
-      },
-      {
-        "args": [
-          {
-            "label": "owner",
-            "type": {
-              "displayName": [
-                "psp22",
-                "psp22_external",
-                "AllowanceInput1"
-              ],
-              "type": 2
-            }
-          },
-          {
-            "label": "spender",
-            "type": {
-              "displayName": [
-                "psp22",
-                "psp22_external",
-                "AllowanceInput2"
-              ],
-              "type": 2
-            }
-          }
-        ],
-        "docs": [
-          " Returns the amount which `spender` is still allowed to withdraw from `owner`.",
-          "",
-          " Returns `0` if no allowance has been set `0`."
-        ],
-        "label": "PSP22::allowance",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 13
-        },
-        "selector": "0x4d47d921"
       },
       {
         "args": [
@@ -549,26 +498,9 @@
             "ink",
             "MessageResult"
           ],
-          "type": 13
+          "type": 10
         },
         "selector": "0x6568382f"
-      },
-      {
-        "args": [],
-        "docs": [
-          " Returns the total token supply."
-        ],
-        "label": "PSP22::total_supply",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 13
-        },
-        "selector": "0x162df8c2"
       },
       {
         "args": [
@@ -629,9 +561,94 @@
             "ink",
             "MessageResult"
           ],
-          "type": 10
+          "type": 11
         },
         "selector": "0xdb20f9f5"
+      },
+      {
+        "args": [],
+        "docs": [
+          " Returns the total token supply."
+        ],
+        "label": "PSP22::total_supply",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 10
+        },
+        "selector": "0x162df8c2"
+      },
+      {
+        "args": [
+          {
+            "label": "spender",
+            "type": {
+              "displayName": [
+                "psp22",
+                "psp22_external",
+                "DecreaseAllowanceInput1"
+              ],
+              "type": 2
+            }
+          },
+          {
+            "label": "delta_value",
+            "type": {
+              "displayName": [
+                "psp22",
+                "psp22_external",
+                "DecreaseAllowanceInput2"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "docs": [
+          " Atomically decreases the allowance granted to `spender` by the caller.",
+          "",
+          " An `Approval` event is emitted.",
+          "",
+          " # Errors",
+          "",
+          " Returns `InsufficientAllowance` error if there are not enough tokens allowed",
+          " by owner for `spender`.",
+          "",
+          " Returns `ZeroSenderAddress` error if sender's address is zero.",
+          "",
+          " Returns `ZeroRecipientAddress` error if recipient's address is zero."
+        ],
+        "label": "PSP22::decrease_allowance",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 11
+        },
+        "selector": "0xfecb57d5"
+      },
+      {
+        "args": [],
+        "docs": [
+          " Returns the token symbol."
+        ],
+        "label": "PSP22Metadata::token_symbol",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 14
+        },
+        "selector": "0x34205be5"
       },
       {
         "args": [],
@@ -646,7 +663,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 14
+          "type": 16
         },
         "selector": "0x7271b782"
       },
@@ -663,16 +680,43 @@
             "ink",
             "MessageResult"
           ],
-          "type": 15
+          "type": 14
         },
         "selector": "0x3d261bd4"
       },
       {
         "args": [],
         "docs": [
-          " Returns the token symbol."
+          " Leaves the contract without owner. It will not be possible to call",
+          " owner's functions anymore. Can only be called by the current owner.",
+          "",
+          " NOTE: Renouncing ownership will leave the contract without an owner,",
+          " thereby removing any functionality that is only available to the owner.",
+          "",
+          " On success a `OwnershipTransferred` event is emitted.",
+          "",
+          " # Errors",
+          "",
+          " Panics with `CallerIsNotOwner` error if caller is not owner"
         ],
-        "label": "PSP22Metadata::token_symbol",
+        "label": "Ownable::renounce_ownership",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 17
+        },
+        "selector": "0x5e228753"
+      },
+      {
+        "args": [],
+        "docs": [
+          " Returns the address of the current owner."
+        ],
+        "label": "Ownable::owner",
         "mutates": false,
         "payable": false,
         "returnType": {
@@ -680,9 +724,9 @@
             "ink",
             "MessageResult"
           ],
-          "type": 15
+          "type": 9
         },
-        "selector": "0x34205be5"
+        "selector": "0x4fa43c8c"
       },
       {
         "args": [
@@ -722,50 +766,6 @@
         "selector": "0x11f43efd"
       },
       {
-        "args": [],
-        "docs": [
-          " Returns the address of the current owner."
-        ],
-        "label": "Ownable::owner",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 9
-        },
-        "selector": "0x4fa43c8c"
-      },
-      {
-        "args": [],
-        "docs": [
-          " Leaves the contract without owner. It will not be possible to call",
-          " owner's functions anymore. Can only be called by the current owner.",
-          "",
-          " NOTE: Renouncing ownership will leave the contract without an owner,",
-          " thereby removing any functionality that is only available to the owner.",
-          "",
-          " On success a `OwnershipTransferred` event is emitted.",
-          "",
-          " # Errors",
-          "",
-          " Panics with `CallerIsNotOwner` error if caller is not owner"
-        ],
-        "label": "Ownable::renounce_ownership",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 17
-        },
-        "selector": "0x5e228753"
-      },
-      {
         "args": [
           {
             "label": "account",
@@ -801,7 +801,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 10
+          "type": 11
         },
         "selector": "0xfc3c75d4"
       },
@@ -841,7 +841,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 10
+          "type": 11
         },
         "selector": "0x7a9da510"
       }
@@ -1284,7 +1284,7 @@
               {
                 "fields": [
                   {
-                    "type": 11
+                    "type": 0
                   }
                 ],
                 "index": 0,
@@ -1305,7 +1305,7 @@
         "params": [
           {
             "name": "T",
-            "type": 11
+            "type": 0
           },
           {
             "name": "E",
@@ -1326,6 +1326,48 @@
               {
                 "fields": [
                   {
+                    "type": 12
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 8
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 12
+          },
+          {
+            "name": "E",
+            "type": 8
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
                     "type": 1
                   }
                 ],
@@ -1335,7 +1377,7 @@
               {
                 "fields": [
                   {
-                    "type": 12
+                    "type": 13
                   }
                 ],
                 "index": 1,
@@ -1351,7 +1393,7 @@
           },
           {
             "name": "E",
-            "type": 12
+            "type": 13
           }
         ],
         "path": [
@@ -1360,7 +1402,7 @@
       }
     },
     {
-      "id": 12,
+      "id": 13,
       "type": {
         "def": {
           "variant": {
@@ -1414,7 +1456,7 @@
       }
     },
     {
-      "id": 13,
+      "id": 14,
       "type": {
         "def": {
           "variant": {
@@ -1422,7 +1464,7 @@
               {
                 "fields": [
                   {
-                    "type": 0
+                    "type": 15
                   }
                 ],
                 "index": 0,
@@ -1443,7 +1485,7 @@
         "params": [
           {
             "name": "T",
-            "type": 0
+            "type": 15
           },
           {
             "name": "E",
@@ -1456,7 +1498,40 @@
       }
     },
     {
-      "id": 14,
+      "id": 15,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "None"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 5
+                  }
+                ],
+                "index": 1,
+                "name": "Some"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 5
+          }
+        ],
+        "path": [
+          "Option"
+        ]
+      }
+    },
+    {
+      "id": 16,
       "type": {
         "def": {
           "variant": {
@@ -1494,81 +1569,6 @@
         ],
         "path": [
           "Result"
-        ]
-      }
-    },
-    {
-      "id": 15,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 16
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 8
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 16
-          },
-          {
-            "name": "E",
-            "type": 8
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 16,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "index": 0,
-                "name": "None"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 5
-                  }
-                ],
-                "index": 1,
-                "name": "Some"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 5
-          }
-        ],
-        "path": [
-          "Option"
         ]
       }
     },
