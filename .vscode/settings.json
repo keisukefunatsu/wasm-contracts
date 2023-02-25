@@ -14,6 +14,7 @@
     }
   ],
   "rust-analyzer.linkedProjects": [
-    "./token/contracts/psp22/Cargo.toml"
+    "./token/contracts/psp22/Cargo.toml",
+    "./nft/contracts/nft/Cargo.toml"
   ],
 }

@@ -22,7 +22,11 @@
     "psp22": {
       "name": "psp22",
       "deployments": [],
-      "language": "ink"
+      "language": "ink",
+      "build": {
+        "timestamp": 1677328433723,
+        "artifactsPath": "/Users/keisukefunatsu/Projects/defi/wasm-contracts/token/artifacts/psp22/1677328433723"
+      }
     }
   },
   "networks": {
