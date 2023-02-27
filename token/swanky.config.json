@@ -22,7 +22,11 @@
     "psp22": {
       "name": "psp22",
       "deployments": [],
-      "language": "ink"
+      "language": "ink",
+      "build": {
+        "timestamp": 1677505629944,
+        "artifactsPath": "/Users/pyon/Projects/defi_projects/astar/wasm-work/token/artifacts/psp22/1677505629944"
+      }
     }
   },
   "networks": {

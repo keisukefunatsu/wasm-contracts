@@ -13,7 +13,7 @@ mod psp22 {
     };
     use openbrush::{
         contracts::{
-            ownable::*,
+            ownable::{self, *},
             psp22::{
                 self,
                 extensions::{burnable, metadata, mintable},
@@ -45,7 +45,7 @@ mod psp22 {
     }
 
     #[ink(storage)]
-    #[derive(Default, Storage)]
+    #[derive(Storage)]
     pub struct Psp22 {
         #[storage_field]
         psp22: psp22::Data,
@@ -56,7 +56,24 @@ mod psp22 {
         #[storage_field]
         ownable: ownable::Data,
     }
+    // We have to implement the "main trait" for our contract to have the PSP22 methods available.
+    impl psp22::PSP22 for Psp22 {}
 
+    // And `PSP22Metadata` to get metadata-related methods.
+    impl metadata::PSP22Metadata for Psp22 {}
+
+    // And so on...
+    impl Ownable for Psp22 {}
+    impl Default for Psp22 {
+        fn default() -> Self {
+            Self {
+                psp22: Default::default(),
+                hated_account: [0u8; 32].into(),
+                metadata: metadata::Data::default(),
+                ownable: ownable::Data::default(),
+            }
+        }
+    }
     impl Psp22 {
         #[ink(constructor)]
         pub fn new(name: String, symbol: String, decimals: u8, total_supply: Balance) -> Self {
@@ -103,15 +120,6 @@ mod psp22 {
             emitter.emit_event(event);
         }
     }
-
-    // We have to implement the "main trait" for our contract to have the PSP22 methods available.
-    impl psp22::PSP22 for Psp22 {}
-
-    // And `PSP22Metadata` to get metadata-related methods.
-    impl metadata::PSP22Metadata for Psp22 {}
-
-    // And so on...
-    impl Ownable for Psp22 {}
 
     impl mintable::PSP22Mintable for Psp22 {
         #[ink(message)]
