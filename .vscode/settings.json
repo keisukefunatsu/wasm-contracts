@@ -1,7 +1,7 @@
 {
   "runTerminalCommand.commands": [
     {
-      "command": "yarn test",
+      "command": "swanky contract test",
       "auto": true
     },
     {
@@ -17,5 +17,8 @@
     "./token/contracts/psp22/Cargo.toml",
     "./nft/contracts/nft/Cargo.toml"
   ],
-  "compile-hero.disable-compile-files-on-did-save-code": false,
+  "rust-analyzer.server.extraEnv": {
+    "RUSTUP_TOOLCHAIN": "nightly"
+  },
+  "rust-analyzer.inlayHints.bindingModeHints.enable": true
 }

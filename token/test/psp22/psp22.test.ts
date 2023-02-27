@@ -43,6 +43,8 @@ describe("psp22 test", () => {
   });
 
   it("Assigns initial balance", async () => {    
+    console.log("ssssss:", (await contract.query.tokenSymbol()).value.unwrap()?.toString())
+    console.log( (await contract.query.totalSupply()).value.unwrap().toNumber())
     expect(
       (await contract.query.totalSupply()).value.unwrap().toNumber()
     ).to.equal(maxSupply);

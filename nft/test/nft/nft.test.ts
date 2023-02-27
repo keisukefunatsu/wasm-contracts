@@ -4,6 +4,7 @@ import NftFactory from "./typedContract/constructors/nft";
 import Nft from "./typedContract/contracts/nft";
 import { ApiPromise, WsProvider, Keyring } from "@polkadot/api";
 import { KeyringPair } from "@polkadot/keyring/types";
+import { IdBuilder } from "./typedContract/types-arguments/nft";
 
 use(chaiAsPromised);
 
@@ -13,16 +14,18 @@ const wsProvider = new WsProvider("ws://127.0.0.1:9944");
 const keyring = new Keyring({ type: "sr25519" });
 
 describe("nft test", () => {
+  const id0 = IdBuilder.U8(0)
+  const id1 = IdBuilder.U8(1)
   let nftFactory: NftFactory;
   let api: ApiPromise;
   let deployer: KeyringPair;
-
-  let contract: Nft;
-  const initialState = true;
+  let signer1: KeyringPair;
+  let contract: Nft;  
 
   before(async function setup(): Promise<void> {
     api = await ApiPromise.create({ provider: wsProvider });
     deployer = keyring.addFromUri("//Alice");
+    signer1 = keyring.addFromUri("//Bob");
 
     nftFactory = new NftFactory(api, deployer);
 
@@ -37,7 +40,11 @@ describe("nft test", () => {
     await api.disconnect();
   });
 
-  it("Assign initial balance", async () => {    
-    expect((await contract.query.flip()).value.unwrap()).to.equal(true)
+  it("Mint nft", async () => {           
+    await contract.withSigner(signer1).tx.mint(deployer.address, id0)
+    await contract.withSigner(signer1).tx.mint(deployer.address, id1)
+    
+    expect((await contract.query.totalSupply()).value.unwrap().toNumber()).to.equal(2)
+    expect(((await contract.query.ownerOf(id0)).value.unwrap()?.toString())).to.equal(deployer.address)
   })
 });

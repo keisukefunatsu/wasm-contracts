@@ -24,8 +24,8 @@
       "deployments": [],
       "language": "ink",
       "build": {
-        "timestamp": 1677336068730,
-        "artifactsPath": "/Users/pyon/Projects/defi_projects/astar/wasm-work/token/artifacts/psp22/1677336068730"
+        "timestamp": 1677505629944,
+        "artifactsPath": "/Users/pyon/Projects/defi_projects/astar/wasm-work/token/artifacts/psp22/1677505629944"
       }
     }
   },

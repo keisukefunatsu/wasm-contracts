@@ -5,7 +5,8 @@
 pub mod nft {
 
     // imports from openbrush
-    use openbrush::contracts::psp34::*;
+    use openbrush::contracts::psp34::extensions::metadata::*;
+    use openbrush::contracts::psp34::extensions::mintable::*;
     use openbrush::traits::Storage;
 
     #[ink(storage)]
@@ -13,10 +14,14 @@ pub mod nft {
     pub struct Nft {
         #[storage_field]
         psp34: psp34::Data,
+        #[storage_field]
+        metadata: metadata::Data,
     }
 
     // Section contains default implementation without any modifications
     impl PSP34 for Nft {}
+    impl PSP34Metadata for Nft {}
+    impl PSP34Mintable for Nft {}
 
     impl Nft {
         #[ink(constructor)]
@@ -25,11 +30,7 @@ pub mod nft {
             _instance
         }
         #[ink(message)]
-        pub fn flip(&self) -> bool {
-            return true;
-        }
-        #[ink(message)]
-        pub fn flip2(&self) -> bool {
+        pub fn test(&self) -> bool {
             return true;
         }
     }
