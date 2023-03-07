@@ -1,15 +1,19 @@
 {
   "runTerminalCommand.commands": [
     {
-      "command": "swanky contract test",
+      "command": "swanky contract test nft",
       "auto": true
     },
     {
-      "command": "cargo +nightly test -- --nocapture",
+      "command": "swanky contract test token",
       "auto": true
     },
     {
-      "command": "cargo +nightly build",
+      "command": "swanky contract compile nft -v && swanky contract test",
+      "auto": true
+    },
+    {
+      "command": "swanky contract compile token -v && swanky contract test",
       "auto": true
     }
   ],

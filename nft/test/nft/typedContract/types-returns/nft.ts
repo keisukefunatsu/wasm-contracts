@@ -3,10 +3,6 @@ import type {ReturnNumber} from '@727-ventures/typechain-types';
 
 export type AccountId = string | number[]
 
-export enum LangError {
-	couldNotReadInput = 'CouldNotReadInput'
-}
-
 export interface Id {
 	u8 ? : number,
 	u16 ? : number,
@@ -47,6 +43,10 @@ export class IdBuilder {
 			bytes: value,
 		};
 	}
+}
+
+export enum LangError {
+	couldNotReadInput = 'CouldNotReadInput'
 }
 
 export interface PSP34Error {

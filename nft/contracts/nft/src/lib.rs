@@ -3,6 +3,7 @@
 
 #[openbrush::contract]
 pub mod nft {
+    use ink::prelude::string::String;
 
     // imports from openbrush
     use openbrush::contracts::psp34::extensions::metadata::*;
@@ -25,8 +26,15 @@ pub mod nft {
 
     impl Nft {
         #[ink(constructor)]
-        pub fn new() -> Self {
+        pub fn new(id: Id, name: String, symbol: String) -> Self {
             let mut _instance = Self::default();
+            // let collection_id = _instance.collection_id();
+            _instance._set_attribute(
+                id.clone(),
+                String::from("name").into_bytes(),
+                name.into_bytes(),
+            );
+            _instance._set_attribute(id, String::from("symbol").into_bytes(), symbol.into_bytes());
             _instance
         }
         #[ink(message)]

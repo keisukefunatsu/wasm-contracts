@@ -77,8 +77,7 @@ mod psp22 {
     impl Psp22 {
         #[ink(constructor)]
         pub fn new(name: String, symbol: String, decimals: u8, total_supply: Balance) -> Self {
-            let mut instance = Self::default();
-
+            let mut instance: Self = Self::default();
             instance.metadata.name = Some(name.into());
             instance.metadata.symbol = Some(symbol.into());
             instance.metadata.decimals = decimals;

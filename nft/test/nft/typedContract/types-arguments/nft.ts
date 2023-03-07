@@ -2,10 +2,6 @@ import type BN from 'bn.js';
 
 export type AccountId = string | number[]
 
-export enum LangError {
-	couldNotReadInput = 'CouldNotReadInput'
-}
-
 export interface Id {
 	u8 ? : (number | string | BN),
 	u16 ? : (number | string | BN),
@@ -46,6 +42,10 @@ export class IdBuilder {
 			bytes: value,
 		};
 	}
+}
+
+export enum LangError {
+	couldNotReadInput = 'CouldNotReadInput'
 }
 
 export interface PSP34Error {
